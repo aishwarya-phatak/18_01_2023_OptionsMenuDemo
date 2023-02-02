@@ -3,6 +3,7 @@ package com.example.optionsmenudemo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mt("onCreate");
         setContentView(R.layout.activity_main);
     }
 
@@ -33,19 +35,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Toast.makeText(this, "onOptions Called", Toast.LENGTH_SHORT).show();
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case MENU_BLUETOOTH_SETTINGS:
+                Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+                startActivity(intent);
+
                 Toast.makeText(this, "Bluetooth Settings", Toast.LENGTH_SHORT).show();
-            break;
+                break;
             case MENU_DISPLAY_SETTINGS:
                 Toast.makeText(this, "Display Settings", Toast.LENGTH_SHORT).show();
-            break;
+                break;
             case MENU_PHONE_SETTINGS:
                 Toast.makeText(this, "Phone Settings", Toast.LENGTH_SHORT).show();
-            break;
+                break;
         }
-            
-        
         return super.onOptionsItemSelected(item);
     }
 
@@ -61,5 +64,46 @@ public class MainActivity extends AppCompatActivity {
         menuItem.getOrder();
 
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mt("onStart");
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mt("onRestart");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mt("onPause");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mt("onResume");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mt("onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mt("onDestroy");
+    }
+
+    private void mt(String text){
+        Toast.makeText(this,text,Toast.LENGTH_LONG).show();
     }
 }
